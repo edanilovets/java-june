@@ -1,14 +1,26 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "io.franzbecker:gradle-lombok:1.14"
+    }
+}
+
 subprojects{
 
     apply plugin: 'java'
+    apply plugin: 'io.franzbecker.gradle-lombok'
 
     repositories {
-        mavenCentral()
+        jcenter()
     }
 
 }
 
 // to load gradle version run: ./gradlew wrapper
 task wrapper(type: Wrapper) {
-    gradleVersion: '4.10.3'
+    gradleVersion = '4.8'
 }
