@@ -1,10 +1,10 @@
-package com.example.model;
+package com.example.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.annotation.Generated;
 
 @Generated("com.robohorse.robopojogenerator")
-public class Addresses{
+public class Cards{
 
 	@JsonProperty("href")
 	private String href;
@@ -20,7 +20,7 @@ public class Addresses{
 	@Override
  	public String toString(){
 		return 
-			"Addresses{" + 
+			"Cards{" + 
 			"href = '" + href + '\'' + 
 			"}";
 		}

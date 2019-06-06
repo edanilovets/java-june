@@ -1,4 +1,4 @@
-package com.example.model;
+package com.example.responses;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import javax.annotation.Generated;

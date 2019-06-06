@@ -2,17 +2,31 @@ ext {
     junitVersion = '5.4.2'
     restAssuredVersion = '4.0.0'
     jacksonDatabindVersion = '2.9.5'
+    allureRestAssuredVersion = '2.7.0'
 }
 
 dependencies {
-    testCompile "io.rest-assured:rest-assured:$restAssuredVersion"
+    compile "io.rest-assured:rest-assured:$restAssuredVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabindVersion"
     testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
     testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
-    
+    compile "io.qameta.allure:allure-rest-assured:$allureRestAssuredVersion"
+    compileOnly "org.projectlombok:lombok:1.18.8"
+    annotationProcessor "org.projectlombok:lombok:1.18.8"
+    testCompile "org.assertj:assertj-core:3.12.2"
 }
 
 test {
     useJUnitPlatform()
     test.outputs.upToDateWhen {false}
+}
+
+allure {
+    version = '2.5.0'
+    aspectjweaver = true
+    configuration = 'compile'
+
+    useJUnit5 {
+        version = '2.7.0'
+    }
 }
