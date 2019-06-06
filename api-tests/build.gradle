@@ -29,17 +29,24 @@ ext {
 dependencies {
     compile "io.rest-assured:rest-assured:$restAssuredVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabindVersion"
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
-    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
     compile "io.qameta.allure:allure-rest-assured:$allureRestAssuredVersion"
+    compile group: 'org.aeonbits.owner', name: 'owner', version: '1.0.10'
+
     compileOnly "org.projectlombok:lombok:1.18.8"
     annotationProcessor "org.projectlombok:lombok:1.18.8"
+
+
+
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
     testCompile "org.assertj:assertj-core:3.12.2"
 }
 
 test {
     useJUnitPlatform()
     test.outputs.upToDateWhen {false}
+    //to be able to use properties: ./gradlew test -Denv=stage
+    systemProperties System.getProperties()
 }
 
 allure {

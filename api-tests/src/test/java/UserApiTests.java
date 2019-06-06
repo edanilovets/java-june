@@ -1,7 +1,9 @@
+import com.example.ProjectConfig;
 import com.example.model.UserPayload;
 import com.example.responses.UserListResponse;
 import com.example.services.UserApiServices;
 import io.restassured.RestAssured;
+import org.aeonbits.owner.ConfigFactory;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -18,7 +20,9 @@ class UserApiTests {
 
     @BeforeAll
     static void setUp() {
-        RestAssured.baseURI = "http://localhost:80/";
+
+        //more info http://owner.aeonbits.org/docs
+        RestAssured.baseURI = ConfigFactory.create(ProjectConfig.class).apiPath();
     }
 
     @Test
