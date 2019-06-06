@@ -8,7 +8,7 @@ import io.restassured.filter.log.ResponseLoggingFilter;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
 
-abstract class ApiServices {
+public abstract class ApiServices {
     RequestSpecification setup(){
         return RestAssured.given()
                 .contentType(ContentType.JSON)

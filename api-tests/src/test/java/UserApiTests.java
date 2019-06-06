@@ -1,4 +1,3 @@
-import com.example.assertions.AssertableResponse;
 import com.example.model.UserPayload;
 import com.example.responses.UserListResponse;
 import com.example.services.UserApiServices;
@@ -41,6 +40,10 @@ class UserApiTests {
         UserListResponse users = userApiServices.getAllCustomers().asPojoFromString(UserListResponse.class);
 
         assertThat(users.getEmbedded().getCustomer().size()).isGreaterThan(15);
+        assertThat(users.getEmbedded().getCustomer().get(0).getFirstName()).isEqualTo("Eve");
+
+        //Using Assertj for generation of assertions
+        // code...
 
     }
 
