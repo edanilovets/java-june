@@ -18,6 +18,16 @@ public class CustomerItem{
 	@JsonProperty("username")
 	private String username;
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	private String id;
+
 	public void setFirstName(String firstName){
 		this.firstName = firstName;
 	}

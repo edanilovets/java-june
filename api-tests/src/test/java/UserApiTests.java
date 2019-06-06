@@ -38,9 +38,9 @@ class UserApiTests {
                 .shouldHave(bodyField(containsString("id")))
                 .getValue("id");
 
-        UserListResponse users = userApiServices.getAllCustomers().asPojo(UserListResponse.class);
+        UserListResponse users = userApiServices.getAllCustomers().asPojoFromString(UserListResponse.class);
 
-        assertThat(users.getEmbedded().getCustomer()).hasSize(5);
+        assertThat(users.getEmbedded().getCustomer().size()).isGreaterThan(15);
 
     }
 
