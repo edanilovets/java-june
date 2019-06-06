@@ -4,7 +4,6 @@ import com.example.responses.UserListResponse;
 import com.example.services.UserApiServices;
 import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
-import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -14,7 +13,7 @@ import static com.example.conditions.Conditions.statusCode;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 
-class UserApiTests {
+class UserApiTests extends BaseTest{
 
     private final UserApiServices userApiServices = new UserApiServices();
 
@@ -30,7 +29,7 @@ class UserApiTests {
     void testCanRegisterUserWithValidCredentials() {
 
         UserPayload userPayload = new UserPayload()
-            .setUsername(RandomStringUtils.randomAlphanumeric(6))
+            .setUsername(faker.name().firstName() + " " + faker.name().lastName())
             .setEmail("user@gmail.com")
             .setPassword("12345");
 

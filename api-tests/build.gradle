@@ -31,7 +31,8 @@ dependencies {
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabindVersion"
     compile "io.qameta.allure:allure-rest-assured:$allureRestAssuredVersion"
     compile group: 'org.aeonbits.owner', name: 'owner', version: '1.0.10'
-
+    compile group: 'com.github.javafaker', name: 'javafaker', version: '0.18'
+    
     compileOnly "org.projectlombok:lombok:1.18.8"
     annotationProcessor "org.projectlombok:lombok:1.18.8"
 
