@@ -30,8 +30,8 @@ class UserApiTests extends BaseTest{
 
         UserPayload userPayload = new UserPayload()
             .setUsername(faker.name().firstName() + " " + faker.name().lastName())
-            .setEmail("user@gmail.com")
-            .setPassword("12345");
+            .setEmail(faker.internet().emailAddress())
+            .setPassword(faker.internet().password());
 
 
         String id = userApiServices.registerUser(userPayload)

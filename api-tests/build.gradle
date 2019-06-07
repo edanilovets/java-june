@@ -1,6 +1,5 @@
 
-//------------------------------------------------------//
-// AssertJ
+// ---------------------AssertJ-------------------------//
 //plugins {
 //    id "org.assertj.generator" version "0.0.6b"
 //}
@@ -27,25 +26,35 @@ ext {
 }
 
 dependencies {
+
+    //JUnit5
+    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
+    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
+
+    //compile used in all module: code and tests
     compile "io.rest-assured:rest-assured:$restAssuredVersion"
     compile "com.fasterxml.jackson.core:jackson-databind:$jacksonDatabindVersion"
     compile "io.qameta.allure:allure-rest-assured:$allureRestAssuredVersion"
-    compile group: 'org.aeonbits.owner', name: 'owner', version: '1.0.10'
-    compile group: 'com.github.javafaker', name: 'javafaker', version: '0.18'
+    //slf4j
+    compile "org.slf4j:slf4j-api:1.7.25"
+    compile "ch.qos.logback:logback-classic:1.2.3"
+    compile "ch.qos.logback:logback-core:1.2.3"
     
-    compileOnly "org.projectlombok:lombok:1.18.8"
-    annotationProcessor "org.projectlombok:lombok:1.18.8"
+    compile "org.aeonbits.owner:owner:1.0.10"
+    compile "com.github.javafaker:javafaker:0.18"
 
-
-
-    testImplementation "org.junit.jupiter:junit-jupiter-api:$junitVersion"
-    testRuntime "org.junit.jupiter:junit-jupiter-engine:$junitVersion"
     testCompile "org.assertj:assertj-core:3.12.2"
 }
 
 test {
+
+    //for JUnit5
     useJUnitPlatform()
+
+    //turn off gradle optimization for not rerun tests
+    //if turned off gradle will run all tests always when: ./gradlew test
     test.outputs.upToDateWhen {false}
+
     //to be able to use properties: ./gradlew test -Denv=stage
     systemProperties System.getProperties()
 }

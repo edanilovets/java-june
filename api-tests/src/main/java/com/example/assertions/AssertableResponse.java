@@ -5,16 +5,19 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import io.qameta.allure.Step;
 import io.restassured.response.Response;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 import java.io.IOException;
 
 @RequiredArgsConstructor
+@Slf4j
 public class AssertableResponse {
 
     private final Response response;
 
     @Step("Should Have {condition}")
     public AssertableResponse shouldHave(Condition condition) {
+        log.info("About to check condition: " + condition);
         condition.check(response);
         return this;
     }
@@ -22,7 +25,7 @@ public class AssertableResponse {
     // To have ability to save values of type String from JSON
     // For other types see getInteger etc.
 
-    @Step
+    @Step("Get Value of {path}")
     public String getValue(String path) {
         return response.jsonPath().getObject(path, String.class);
     }
