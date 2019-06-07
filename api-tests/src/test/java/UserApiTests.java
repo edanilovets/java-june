@@ -3,13 +3,13 @@ import com.example.model.UserPayload;
 import com.example.responses.UserListResponse;
 import com.example.services.UserApiServices;
 import io.restassured.RestAssured;
+import io.restassured.http.ContentType;
 import org.aeonbits.owner.ConfigFactory;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static com.example.conditions.Conditions.bodyField;
-import static com.example.conditions.Conditions.statusCode;
+import static com.example.conditions.Conditions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 
@@ -20,12 +20,12 @@ class UserApiTests extends BaseTest{
     @BeforeAll
     static void setUp() {
 
-        //more info http://owner.aeonbits.org/docs
+        //Java Owner library
         RestAssured.baseURI = ConfigFactory.create(ProjectConfig.class).apiPath();
     }
 
     @Test
-    @DisplayName("Can Register User WIth Valid Credentials")
+    @DisplayName("Can Register User With Valid Credentials")
     void testCanRegisterUserWithValidCredentials() {
 
         UserPayload userPayload = new UserPayload()
@@ -33,20 +33,14 @@ class UserApiTests extends BaseTest{
             .setEmail(faker.internet().emailAddress())
             .setPassword(faker.internet().password());
 
-
         String id = userApiServices.registerUser(userPayload)
                 .shouldHave(statusCode(200))
-                .shouldHave(bodyField("id", not(blankString())))
+                .shouldHave(contentType(ContentType.JSON))
                 .shouldHave(bodyField(containsString("id")))
+                .shouldHave(bodyField("id", not(blankString())))
                 .getValue("id");
 
-        UserListResponse users = userApiServices.getAllCustomers().asPojoFromString(UserListResponse.class);
-
-        assertThat(users.getEmbedded().getCustomer().size()).isGreaterThan(15);
-        assertThat(users.getEmbedded().getCustomer().get(0).getFirstName()).isEqualTo("Eve");
-
-        //Using Assertj for generation of assertions
-        // code...
+        assertThat(id.length()).isEqualTo(24);
 
     }
 
@@ -57,7 +51,17 @@ class UserApiTests extends BaseTest{
                 .setUsername(null);
 
         userApiServices.registerUser(userPayload)
-                .shouldHave(statusCode(500))
-                .shouldHave(bodyField("id", not(blankString())));
+                .shouldHave(contentType(ContentType.JSON))
+                .shouldHave(statusCode(500));
+    }
+
+    @Test
+    @DisplayName("Can Return all customers")
+    void testCanReturnAllCustomers() {
+        UserListResponse users =userApiServices.getAllCustomers()
+                .asPojoFromString(UserListResponse.class);
+
+        assertThat(users.getEmbedded().getCustomer().size()).isGreaterThan(15);
+        assertThat(users.getEmbedded().getCustomer().get(0).getFirstName()).isEqualTo("Eve");
     }
 }

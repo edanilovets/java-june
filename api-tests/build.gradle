@@ -39,11 +39,12 @@ dependencies {
     compile "org.slf4j:slf4j-api:1.7.25"
     compile "ch.qos.logback:logback-classic:1.2.3"
     compile "ch.qos.logback:logback-core:1.2.3"
-    
+
     compile "org.aeonbits.owner:owner:1.0.10"
     compile "com.github.javafaker:javafaker:0.18"
 
-    testCompile "org.assertj:assertj-core:3.12.2"
+    compile "org.assertj:assertj-core:3.12.2"
+    compile "io.qameta.allure:allure-assertj:2.12.1"
 }
 
 test {
@@ -54,6 +55,11 @@ test {
     //turn off gradle optimization for not rerun tests
     //if turned off gradle will run all tests always when: ./gradlew test
     test.outputs.upToDateWhen {false}
+
+    testLogging {
+        showStandardStreams = true
+        exceptionFormat = 'full'
+    }
 
     //to be able to use properties: ./gradlew test -Denv=stage
     systemProperties System.getProperties()

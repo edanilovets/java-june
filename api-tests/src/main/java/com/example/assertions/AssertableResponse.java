@@ -25,13 +25,11 @@ public class AssertableResponse {
     // To have ability to save values of type String from JSON
     // For other types see getInteger etc.
 
-    @Step("Get Value of {path}")
     public String getValue(String path) {
         return response.jsonPath().getObject(path, String.class);
     }
 
     //If respnse as JSON
-    @Step
     public <T> T asPojo(Class<T> tClass) {
         return response.as(tClass);
     }
