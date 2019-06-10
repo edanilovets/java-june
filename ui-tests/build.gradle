@@ -1,0 +1,22 @@
+ext {
+    testNGVersion = "6.13"
+    selenideVersion = "4.14.2"
+}
+
+dependencies {
+    //add module api-tests
+    compile project (":api-tests")
+
+    compile "org.testng:testng:$testNGVersion"
+    compile "com.codeborne:selenide:$selenideVersion"
+}
+
+test {
+    //for TestNG
+    useTestNG() { }
+    testLogging {
+        events "PASSED", "FAILED", "SKIPPED"
+        exceptionFormat = 'full'
+    }
+    test.outputs.upToDateWhen {false}
+}
