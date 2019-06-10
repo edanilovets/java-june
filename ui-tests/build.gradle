@@ -15,7 +15,7 @@ test {
     //for TestNG
     useTestNG() { }
     testLogging {
-        events "PASSED", "FAILED", "SKIPPED"
+        // events "PASSED", "FAILED", "SKIPPED"
         exceptionFormat = 'full'
     }
     test.outputs.upToDateWhen {false}

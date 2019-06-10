@@ -12,7 +12,7 @@
 //}
 //
 //assertJ {
-//    // default: generated-srcs/${SOURCE_SET_NAME_TAG}/java
+//    // default: generated-src/${SOURCE_SET_NAME_TAG}/java
 //    outputDir = "src-gen/${SOURCE_SET_NAME_TAG}/java"
 //}
 //------------------------------------------------------//
@@ -44,7 +44,7 @@ dependencies {
     compile "com.github.javafaker:javafaker:0.18"
 
     compile "org.assertj:assertj-core:3.12.2"
-    compile "io.qameta.allure:allure-assertj:2.12.1"
+    //compile "io.qameta.allure:allure-assertj:2.12.1"
 }
 
 test {

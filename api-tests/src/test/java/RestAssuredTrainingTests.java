@@ -17,6 +17,7 @@ class RestAssuredTrainingTests {
 
     }
     @Test
+    @Disabled
     void Example1JSON() throws IOException {
         String id = "57a98d98e4b00679b4a830af";
         RestAssured
