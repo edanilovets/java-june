@@ -9,6 +9,8 @@ dependencies {
 
     compile "org.testng:testng:$testNGVersion"
     compile "com.codeborne:selenide:$selenideVersion"
+    compile group: 'io.qameta.allure', name: 'allure-selenide', version: '2.10.0'
+    compile group: 'io.qameta.allure', name: 'allure-testng', version: '2.10.0'
 }
 
 test {
@@ -19,4 +21,10 @@ test {
         exceptionFormat = 'full'
     }
     test.outputs.upToDateWhen {false}
+}
+
+allure {
+    version = '2.5.0'
+    aspectjweaver = true
+    autoconfigure = true
 }
