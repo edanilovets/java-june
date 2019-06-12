@@ -2,6 +2,7 @@ package com.socks.ui.tests;
 
 import com.codeborne.selenide.Configuration;
 import com.codeborne.selenide.Selenide;
+import com.codeborne.selenide.WebDriverRunner;
 import com.codeborne.selenide.logevents.SelenideLogger;
 import com.example.ProjectConfig;
 import com.example.model.UserPayload;
@@ -11,6 +12,7 @@ import io.qameta.allure.Step;
 import io.qameta.allure.selenide.AllureSelenide;
 import io.restassured.RestAssured;
 import org.aeonbits.owner.ConfigFactory;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
 
 import java.util.Locale;
@@ -22,12 +24,16 @@ public class BaseUiTest {
 
     @BeforeClass
     public void setUp() {
-        //Configuration.browser = "chrome";
-        RestAssured.baseURI = ConfigFactory.create(ProjectConfig.class).apiPath();
+        Configuration.browser = "chrome";
         Configuration.baseUrl = "http://localhost:80";
+        RestAssured.baseURI = ConfigFactory.create(ProjectConfig.class).apiPath();
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
     }
 
+    @AfterMethod
+    public void tearDown() {
+        WebDriverRunner.closeWebDriver();
+    }
 
     @Step
     protected <T> T at(Class<T> pageClass) {
