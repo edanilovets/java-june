@@ -20,4 +20,8 @@ public class UserPayload{
 	@JsonProperty("username")
 	private String username;
 
+	private String firstname;
+
+	private String lastname;
+
 }

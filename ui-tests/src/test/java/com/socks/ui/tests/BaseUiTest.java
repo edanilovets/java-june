@@ -36,13 +36,27 @@ public class BaseUiTest {
 
 
     @Step
-    protected UserPayload createNewUser() {
+    protected UserPayload createAndRegisterNewUser() {
         UserPayload userPayload = new UserPayload()
                 .setUsername(faker.name().username())
                 .setEmail(faker.internet().emailAddress())
-                .setPassword(faker.internet().password());
+                .setPassword(faker.internet().password())
+                .setFirstname(faker.name().firstName())
+                .setLastname(faker.name().lastName());
 
         userApiServices.registerUser(userPayload);
+        return userPayload;
+    }
+
+    @Step
+    protected UserPayload createNewUser() {
+
+        UserPayload userPayload = new UserPayload()
+                .setUsername(faker.name().username())
+                .setEmail(faker.internet().emailAddress())
+                .setPassword(faker.internet().password())
+                .setFirstname(faker.name().firstName())
+                .setLastname(faker.name().lastName());
         return userPayload;
     }
 }

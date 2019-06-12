@@ -10,4 +10,9 @@ public class LoggedUserPage {
     public SelenideElement logoutButton(){
         return Selenide.$("#logout > a");
     }
+
+    @Step
+    public SelenideElement loggedAsText(){
+        return Selenide.$("#howdy > a");
+    }
 }
