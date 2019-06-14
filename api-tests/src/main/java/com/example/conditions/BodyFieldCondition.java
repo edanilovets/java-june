@@ -24,9 +24,9 @@ public class BodyFieldCondition implements Condition {
     @Override
     public String toString() {
         if (StringUtils.isBlank(path)) {
-            return "Body Field: " + matcher;
+            return "Body=" + matcher;
         } else {
-            return "Body Field: " + path + " - " + matcher;
+            return "Body=" + path + " - " + matcher;
         }
 
     }

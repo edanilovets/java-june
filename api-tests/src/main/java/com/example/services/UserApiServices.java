@@ -8,7 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class UserApiServices extends ApiServices{
 
-    @Step
+    @Step("Register User: {userPayload}")
     public AssertableResponse registerUser(UserPayload userPayload) {
         log.info("About to register user: " + userPayload);
         return new AssertableResponse(setup()
@@ -24,7 +24,7 @@ public class UserApiServices extends ApiServices{
                 .get("customers"));
     }
 
-    @Step
+    @Step("Get User by Id={id}")
     public AssertableResponse getUserById(String id) {
         return new AssertableResponse(setup()
                 .when()

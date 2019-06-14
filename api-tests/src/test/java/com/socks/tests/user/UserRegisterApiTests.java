@@ -1,7 +1,7 @@
+package com.socks.tests.user;
+
 import com.example.ProjectConfig;
 import com.example.model.UserPayload;
-import com.example.responses.UserListResponse;
-import com.example.services.UserApiServices;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import org.aeonbits.owner.ConfigFactory;
@@ -13,9 +13,13 @@ import static com.example.conditions.Conditions.*;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.*;
 
-class UserApiTests extends BaseTest{
+class UserRegisterApiTests extends BaseTest{
 
-    private final UserApiServices userApiServices = new UserApiServices();
+    /***
+     * Questions:
+     * How to view assertions in Allure?
+     *
+     */
 
     @BeforeAll
     static void setUp() {
@@ -36,8 +40,8 @@ class UserApiTests extends BaseTest{
         String id = userApiServices.registerUser(userPayload)
                 .shouldHave(statusCode(200))
                 .shouldHave(contentType(ContentType.JSON))
-                .shouldHave(bodyField(containsString("id")))
-                .shouldHave(bodyField("id", not(blankString())))
+                .shouldHave(body(containsString("id")))
+                .shouldHave(body("id", not(blankString())))
                 .getValue("id");
 
         assertThat(id.length()).isEqualTo(24);
@@ -46,22 +50,17 @@ class UserApiTests extends BaseTest{
 
     @Test
     @DisplayName("Can Not Register User With Invalid Credentials")
-    void testCanNotRegisterUserWithInvalidCredentials() {
+    void testCanNotRegisterUserWithEmptyUsername() {
         UserPayload userPayload = new UserPayload()
-                .setUsername(null);
+                .setUsername("")
+                .setPassword(faker.internet().password())
+                .setEmail(faker.internet().emailAddress());
 
         userApiServices.registerUser(userPayload)
-                .shouldHave(contentType(ContentType.JSON))
-                .shouldHave(statusCode(500));
+                //.shouldHave(contentType(ContentType.JSON))
+                .shouldHave(statusCode(500))
+                .shouldHave(header("Content-Length", "0"))
+                .shouldHave(body(is(emptyOrNullString())));
     }
 
-    @Test
-    @DisplayName("Can Return all customers")
-    void testCanReturnAllCustomers() {
-        UserListResponse users =userApiServices.getAllCustomers()
-                .asPojoFromString(UserListResponse.class);
-
-        assertThat(users.getEmbedded().getCustomer().size()).isGreaterThan(15);
-        assertThat(users.getEmbedded().getCustomer().get(0).getFirstName()).isEqualTo("Eve");
-    }
 }

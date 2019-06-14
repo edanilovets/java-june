@@ -14,7 +14,7 @@ public class Embedded{
 		this.customer = customer;
 	}
 
-	public List<CustomerItem> getCustomer(){
+	public List<CustomerItem> getCustomers(){
 		return customer;
 	}
 

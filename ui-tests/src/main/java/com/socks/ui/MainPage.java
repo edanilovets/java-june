@@ -27,6 +27,7 @@ public class MainPage {
 
         Selenide.$("#register > a").click();
         Selenide.$("#register-username-modal").sendKeys(userPayload.getUsername());
+        //Selenide.$("#register-username-modal").setValue(userPayload.getUsername());
         Selenide.$("#register-first-modal").sendKeys(userPayload.getFirstname());
         Selenide.$("#register-last-modal").sendKeys(userPayload.getLastname());
         Selenide.$("#register-email-modal").sendKeys(userPayload.getEmail());
