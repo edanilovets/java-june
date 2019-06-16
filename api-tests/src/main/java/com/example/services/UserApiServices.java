@@ -17,6 +17,14 @@ public class UserApiServices extends ApiServices{
                 .post("register"));
     }
 
+    @Step("Delete User with Id: {id}")
+    public AssertableResponse deleteUserById(String id) {
+        log.info("About to delete user with id: " + id);
+        return new AssertableResponse(setup()
+                .when()
+                .delete("customers/" + id));
+    }
+
     @Step
     public AssertableResponse getAllCustomers() {
         return new AssertableResponse(setup()

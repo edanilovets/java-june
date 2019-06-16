@@ -1,11 +1,7 @@
 package com.socks.tests.user;
 
-import com.example.ProjectConfig;
 import com.example.model.UserPayload;
-import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
-import org.aeonbits.owner.ConfigFactory;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
@@ -20,13 +16,6 @@ class UserRegisterApiTests extends BaseTest{
      * How to view assertions in Allure?
      *
      */
-
-    @BeforeAll
-    static void setUp() {
-
-        //Java Owner library
-        RestAssured.baseURI = ConfigFactory.create(ProjectConfig.class).apiPath();
-    }
 
     @Test
     @DisplayName("Can Register User With Valid Credentials")
@@ -49,7 +38,7 @@ class UserRegisterApiTests extends BaseTest{
     }
 
     @Test
-    @DisplayName("Can Not Register User With Invalid Credentials")
+    @DisplayName("Can Not Register User With Empty Username")
     void testCanNotRegisterUserWithEmptyUsername() {
         UserPayload userPayload = new UserPayload()
                 .setUsername("")
