@@ -12,6 +12,7 @@ import static org.hamcrest.Matchers.*;
 class UserRegisterApiTests extends BaseTest{
 
     /***
+     * Keep in mind while writing tests: more than 1 thread...
      * Questions:
      * How to view assertions in Allure?
      *

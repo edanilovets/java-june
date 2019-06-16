@@ -24,9 +24,10 @@ public class BaseUiTest {
 
     @BeforeClass
     public void setUp() {
-        Configuration.browser = "chrome";
-        Configuration.baseUrl = "http://localhost:80";
-        RestAssured.baseURI = ConfigFactory.create(ProjectConfig.class).apiPath();
+        Configuration.browser = "com.socks.ui.drivers.SelenoidWebDriverProvider";
+        Configuration.baseUrl = "http://192.168.31.250:80";
+        //RestAssured.baseURI = ConfigFactory.create(ProjectConfig.class).apiPath();
+        RestAssured.baseURI = "http://192.168.31.250:80";
         SelenideLogger.addListener("AllureSelenide", new AllureSelenide().screenshots(true).savePageSource(false));
     }
 
