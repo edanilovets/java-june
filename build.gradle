@@ -25,6 +25,3 @@ subprojects {
 }
 
 // to load gradle version run: ./gradlew wrapper
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.8'
-}
